@@ -2,7 +2,6 @@ import sys
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
-import dotenv
 from course import Course
 from settings import json_file
 
