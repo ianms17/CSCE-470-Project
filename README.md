@@ -1,13 +1,13 @@
 # CSCE-470-Project
 
 ## How Run algorithm
+- Algo has not checking if class exists right now and only 400 level csce classes are in there
 1. Clone the repo
 2. Checkout the main branch
 3. cd into ranker-algorithm
 4. run the command "pip install firebase-admin"
 5. run the python script "python3 ranker.py {400 level csce course number}"
 6. Ex: python3 ranker.py 411
-7: Algo has not checking if class exists right now and only 400 level csce classes are in there
 
 
 ## React Firebase ENV Needs:
