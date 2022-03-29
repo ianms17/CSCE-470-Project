@@ -1,3 +1,7 @@
 /.idea
 /node_modules
 *.env
+/csce470/
+/__pycache__/
+ranker-algorithm/settings.py
+ranker-algorithm/csce470-1c014-firebase-adminsdk-9ot6c-66cdaf2313.json
