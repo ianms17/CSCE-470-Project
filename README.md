@@ -6,7 +6,8 @@
 3. cd into ranker-algorithm
 4. run the command "pip install firebase-admin"
 5. run the python script "python3 ranker.py {400 level csce course number}"
-    Ex: python3 ranker.py 411
+6. Ex: python3 ranker.py 411
+Note: Algo has not checking if class exists right now and only 400 level csce classes are in there
 
 
 ## React Firebase ENV Needs:
