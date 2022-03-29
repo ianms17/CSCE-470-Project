@@ -5,7 +5,7 @@ from firebase_admin import firestore
 from course import Course
 from settings import json_file
 
-cred = credentials.Certificate(json_file)
+cred = credentials.Certificate('csce470-1c014-46835c0b1817.json')
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
