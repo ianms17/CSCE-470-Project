@@ -9,7 +9,7 @@
     Ex: python3 ranker.py 411
 
 
-## Firebase ENV Needs:
+## React Firebase ENV Needs:
 REACT_APP_FIREBASE_API_KEY = "ENTER_KEY_HERE" \
 REACT_APP_FIREBASE_AUTH_DOMAIN = "PROJECT_NAME.firebaseapp.com" \
 REACT_APP_FIREBASE_DATABASE_URL = "https://PROJECT_NAME.firebaseio.com" \
