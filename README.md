@@ -1,5 +1,14 @@
 # CSCE-470-Project
 
+## How Run algorithm
+1. Clone the repo
+2. Checkout the main branch
+3. cd into ranker-algorithm
+4. run the command "pip install firebase-admin"
+5. run the python script "python3 ranker.py {400 level csce course number}"
+    Ex: python3 ranker.py 411
+
+
 ## Firebase ENV Needs:
 REACT_APP_FIREBASE_API_KEY = "ENTER_KEY_HERE" \
 REACT_APP_FIREBASE_AUTH_DOMAIN = "PROJECT_NAME.firebaseapp.com" \
