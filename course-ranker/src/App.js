@@ -1,6 +1,5 @@
-// import logo from './logo.svg';
+
 import './App.css';
-// import firebase from "./firebase";
 import { Course } from "./course";
 import firebaseApp from "./firebase";
 import {collection, query, where, getDocs, getFirestore} from "firebase/firestore";
@@ -19,24 +18,7 @@ function App() {
 
       let course_list = [];
       querySnapshot.forEach((doc) => {
-          let course = new Course(
-              doc.data().department,
-              doc.data().course,
-              doc.data().year,
-              doc.data().semester,
-              doc.data().prof,
-              doc.data().gpa,
-              doc.data().section,
-              doc.data().a,
-              doc.data().b,
-              doc.data().c,
-              doc.data().d,
-              doc.data().f,
-              doc.data().q,
-              doc.data().finished,
-              doc.data().enrolled
-          );
-          course_list.push(course);
+          course_list.push(doc.data());
       });
       return course_list;
   }
