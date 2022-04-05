@@ -1,8 +1,17 @@
+import React, { useState } from 'react';
 import './App.css';
 import firebaseApp from "./firebase";
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 import {collection, query, where, getDocs, getFirestore} from "firebase/firestore";
 
 function App() {
+    const [prof_results, setProfResults] = useState([])
+    const [value, setValue] = useState("");
 
     const a_weight = 0.2
     const q_weight = 0.7
@@ -53,14 +62,13 @@ function App() {
             let prof_score = prof_a + prof_q + prof_pass + prof_gpa + prof_num_taught
             prof_scores.set(key, prof_score)
         })
-
-        console.log(prof_scores)
-
+        let arr = Array.from(prof_scores)
+        setProfResults(arr)
     }
 
-      async function getMatchingDocs() {
+      async function getMatchingDocs(course) {
           const db = getFirestore(firebaseApp);
-          const q = query(collection(db, "courses"), where("course", "==", 411));
+          const q = query(collection(db, "courses"), where("course", "==", parseInt(course)));
           const querySnapshot = await getDocs(q);
           querySnapshot.forEach((doc) => {
               course_list.push(doc.data());
@@ -68,12 +76,47 @@ function App() {
           rank();
       }
 
-    getMatchingDocs();
-
+      console.log(prof_results)
+      console.log(value)
 
     return (
-        <div className="App">
-            <h1> Firebase Test </h1>
+        <div>
+             <Box sx={{ flexGrow: 1 }}>
+                 <AppBar position="static">
+                    <Toolbar>
+                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        CSCE Course Ranker
+                    </Typography>
+                    </Toolbar>
+                </AppBar>
+
+            </Box>
+            <Box sx={{marginTop: "2%", display:"flex", justifyContent:"center"}}>
+                 <TextField id="standard-basic" label="Standard" variant="standard" value={value} onChange={(e) => setValue(e.target.value)} />
+                <Button variant="contained" onClick={() => {
+                    getMatchingDocs(value);
+                }}>Submit</Button>
+            </Box>
+            <Box sx={{ display:"flex", justifyContent:"center", marginTop: "2%", textAlign: "center"}}>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Teacher</th>
+                        <th>Value</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {prof_results.map((item, index) => {
+                        return (
+                        <tr>
+                            <td key={item[0]}>{item[0]}</td>
+                            <td key={item[1]}>{item[1]}</td>
+                        </tr>
+                        );
+                    })}
+                    </tbody>
+                </table>
+            </Box>
         </div>
     );
 }
