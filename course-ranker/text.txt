@@ -1,0 +1,90 @@
+const columns = [
+    { field: 'course', headerName: 'Course', width: 90 },
+    {
+      field: 'year',
+      headerName: 'Year',
+      width: 10,
+      editable: false,
+    },
+    {
+      field: 'semester',
+      headerName: 'Semester',
+      width: 10,
+      editable: false,
+    },
+    {
+      field: 'prof',
+      headerName: 'Professor',
+      width: 10,
+      editable: false,
+    },
+    {
+      field: 'gpa',
+      headerName: 'GPA',
+      width: 10,
+    },
+    {
+      field: 'section',
+      headerName: 'Section',
+      width: 10,
+    },
+    {
+      field: 'a',
+      headerName: 'A',
+      width: 10,
+    },
+    {
+      field: 'b',
+      headerName: 'B',
+      width: 10
+    },
+    {
+      field: 'c',
+      headerName: 'C',
+      width: 10
+    },
+    {
+      field: 'd',
+      headerName: 'D',
+      width: 10
+    },
+    {
+      field: 'f',
+      headerName: 'F',
+      width: 10
+    },
+    {
+      field: 'q',
+      headerName: 'Q',
+      width: 10
+    },
+    {
+      field: 'totalfinished',
+      headerName:'TotalFinished',
+      width: 10
+    },
+    {
+      field: 'totalenrolled',
+      headerName: 'TotalEnrolled',
+      width: 10
+    },
+  ];
+  
+  const rows = [
+    {
+      course: null,
+      year: null,
+      semester: null,
+      prof: null,
+      gpa: null,
+      section: null,
+      a: null,
+      b: null,
+      c: null,
+      d: null,
+      f: null,
+      q: null,
+      totalfinished: null,
+      totalenrolled: null
+    },
+  ];
