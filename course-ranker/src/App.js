@@ -59,10 +59,11 @@ function App() {
             let prof_pass = prof_pass_rate.get(key) * pass_weight
             let prof_gpa = prof_avg_gpa.get(key) * gpa_weight
             let prof_num_taught = num_times_taught.get(key) * num_taught_weight
-            let prof_score = prof_a + prof_q + prof_pass + prof_gpa + prof_num_taught
+            let prof_score = prof_a + prof_pass + prof_gpa + prof_num_taught - prof_q
             prof_scores.set(key, prof_score)
         })
-        let arr = Array.from(prof_scores)
+        let sorted_prof_scores = new Map([...prof_scores.entries()].sort((a, b) => b[1] - a[1]))
+        let arr = Array.from(sorted_prof_scores)
         setProfResults(arr)
     }
 
