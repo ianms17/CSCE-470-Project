@@ -12,7 +12,6 @@ import {collection, query, where, getDocs, getFirestore} from "firebase/firestor
 function App() {
     const [prof_results, setProfResults] = useState([])
     const [value, setValue] = useState("");
-     const [value, setValue] = useState("");
 
     const a_weight = 0.2
     const q_weight = 0.7
