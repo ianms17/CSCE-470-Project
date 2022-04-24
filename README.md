@@ -1,4 +1,5 @@
 # CSCE-470-Project
+The code base of the hosted application is in the dev branch not main
 
 ## How Run algorithm
 - Algo has not checking if class exists right now and only 400 level csce classes are in there
