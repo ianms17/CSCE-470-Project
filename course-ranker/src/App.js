@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import {collection, query, where, getDocs, getFirestore} from "firebase/firestore";
+import {Select} from "@mui/material";
 
 function App() {
     const [prof_results, setProfResults] = useState([])
@@ -67,18 +68,18 @@ function App() {
         setProfResults(arr)
     }
 
-      async function getMatchingDocs(course) {
-          const db = getFirestore(firebaseApp);
-          const q = query(collection(db, "courses"), where("course", "==", parseInt(course)));
-          const querySnapshot = await getDocs(q);
-          querySnapshot.forEach((doc) => {
-              course_list.push(doc.data());
-          });
-          rank();
-      }
+    async function getMatchingDocs(course) {
+        const db = getFirestore(firebaseApp);
+        const q = query(collection(db, "courses"), where("course", "==", parseInt(course)));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            course_list.push(doc.data());
+        });
+        rank();
+    }
 
-      console.log(prof_results)
-      console.log(value)
+    console.log(prof_results)
+    console.log(value)
 
     return (
         <div>
@@ -93,25 +94,30 @@ function App() {
 
             </Box>
             <Box sx={{marginTop: "2%", display:"flex", justifyContent:"center"}}>
-                 <TextField id="standard-basic" label="Standard" variant="standard" value={value} onChange={(e) => setValue(e.target.value)} />
+                 <TextField id="standard-basic" label="CSCE Course Number" variant="standard" value={value} onChange={(e) => setValue(e.target.value)} />
                 <Button variant="contained" onClick={() => {
                     getMatchingDocs(value);
                 }}>Submit</Button>
             </Box>
             <Box sx={{ display:"flex", justifyContent:"center", marginTop: "2%", textAlign: "center"}}>
-                <table>
+                <table style={{borderRadius:"5px", fontSize:"18px", borderCollapse:"collapse", width:"80%",
+                    whiteSpace:"nowrap", backgroundColor:"white"}}>
                     <thead>
                     <tr>
-                        <th>Teacher</th>
-                        <th>Value</th>
+                        <th style={{ width:"50%", border:"1px solid black", backgroundColor:"rgba(71,147,227,1)",
+                            color:"#ffffff" }}>Professor</th>
+                        <th style={{ width:"50%", border:"1px solid black", backgroundColor:"rgba(71,147,227,1)",
+                            color:"#ffffff" }}>Rating</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody style={{ borderBottom:"1px solid #d8d8d8" }}>
                     {prof_results.map((item, index) => {
                         return (
                         <tr>
-                            <td key={item[0]}>{item[0]}</td>
-                            <td key={item[1]}>{item[1]}</td>
+                            <td style={{ borderRight:"1px solid #d8d8d8",
+                                borderLeft:"1px solid #d8d8d8" }} key={item[0]}>{item[0]}</td>
+                            <td style={{ borderRight:"1px solid #d8d8d8",
+                                borderLeft:"1px solid #d8d8d8" }} key={item[1]}>{item[1]}</td>
                         </tr>
                         );
                     })}
