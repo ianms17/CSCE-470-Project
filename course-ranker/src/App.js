@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import {collection, query, where, getDocs, getFirestore} from "firebase/firestore";
+import {Select} from "@mui/material";
 
 function App() {
     const [prof_results, setProfResults] = useState([])
@@ -67,23 +68,23 @@ function App() {
         setProfResults(arr)
     }
 
-      async function getMatchingDocs(course) {
-          const db = getFirestore(firebaseApp);
-          const q = query(collection(db, "courses"), where("course", "==", parseInt(course)));
-          const querySnapshot = await getDocs(q);
-          querySnapshot.forEach((doc) => {
-              course_list.push(doc.data());
-          });
-          rank();
-      }
+    async function getMatchingDocs(course) {
+        const db = getFirestore(firebaseApp);
+        const q = query(collection(db, "courses"), where("course", "==", parseInt(course)));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            course_list.push(doc.data());
+        });
+        rank();
+    }
 
-      console.log(prof_results)
-      console.log(value)
+    console.log(prof_results)
+    console.log(value)
 
     return (
         <div>
              <Box sx={{ flexGrow: 1 }}>
-                 <AppBar position="static">
+                 <AppBar position="static" sx={{ bgcolor: "maroon" }}>
                     <Toolbar>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         CSCE Course Ranker
@@ -93,25 +94,65 @@ function App() {
 
             </Box>
             <Box sx={{marginTop: "2%", display:"flex", justifyContent:"center"}}>
-                 <TextField id="standard-basic" label="Standard" variant="standard" value={value} onChange={(e) => setValue(e.target.value)} />
-                <Button variant="contained" onClick={() => {
+                <label>CSCE Course Number:</label>
+            </Box>
+                <Box sx={{marginTop: "2%", display:"flex", justifyContent:"center"}}>
+                <input list="browsers" name="browser" variant="standard" value={value} onChange={(e) => setValue(e.target.value)} />
+                    <datalist id="browsers">
+                        <option value="402"/>
+                        <option value="410"/>
+                        <option value="411"/>
+                        <option value="420"/>
+                        <option value="421"/>
+                        <option value="430"/>
+                        <option value="431"/>
+                        <option value="433"/>
+                        <option value="434"/>
+                        <option value="435"/>
+                        <option value="436"/>
+                        <option value="438"/>
+                        <option value="440"/>
+                        <option value="441"/>
+                        <option value="443"/>
+                        <option value="445"/>
+                        <option value="447"/>
+                        <option value="451"/>
+                        <option value="452"/>
+                        <option value="461"/>
+                        <option value="462"/>
+                        <option value="463"/>
+                        <option value="464"/>
+                        <option value="465"/>
+                        <option value="469"/>
+                        <option value="470"/>
+                        <option value="481"/>
+                        <option value="482"/>
+                        <option value="483"/>
+                        <option value="489"/>
+                    </datalist>
+                <Button variant="contained" sx={{ bgcolor: "maroon" }} onClick={() => {
                     getMatchingDocs(value);
                 }}>Submit</Button>
             </Box>
             <Box sx={{ display:"flex", justifyContent:"center", marginTop: "2%", textAlign: "center"}}>
-                <table>
+                <table style={{borderRadius:"5px", fontSize:"18px", borderCollapse:"collapse", width:"80%",
+                    whiteSpace:"nowrap", backgroundColor:"lightgray"}}>
                     <thead>
                     <tr>
-                        <th>Teacher</th>
-                        <th>Value</th>
+                        <th style={{ width:"50%", border:"1px solid black", backgroundColor:"rgba(128,0,0,1)",
+                            color:"#ffffff" }}>Professor</th>
+                        <th style={{ width:"50%", border:"1px solid black", backgroundColor:"rgba(128,0,0,1)",
+                            color:"#ffffff" }}>Rating</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody style={{ borderBottom:"1px solid #d8d8d8" }}>
                     {prof_results.map((item, index) => {
                         return (
                         <tr>
-                            <td key={item[0]}>{item[0]}</td>
-                            <td key={item[1]}>{item[1]}</td>
+                            <td style={{ borderRight:"1px solid #d8d8d8",
+                                borderLeft:"1px solid #d8d8d8" }} key={item[0]}>{item[0]}</td>
+                            <td style={{ borderRight:"1px solid #d8d8d8",
+                                borderLeft:"1px solid #d8d8d8" }} key={item[1]}>{item[1]}</td>
                         </tr>
                         );
                     })}
