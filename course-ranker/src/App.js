@@ -84,7 +84,7 @@ function App() {
     return (
         <div>
              <Box sx={{ flexGrow: 1 }}>
-                 <AppBar position="static">
+                 <AppBar position="static" sx={{ bgcolor: "maroon" }}>
                     <Toolbar>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         CSCE Course Ranker
@@ -94,19 +94,54 @@ function App() {
 
             </Box>
             <Box sx={{marginTop: "2%", display:"flex", justifyContent:"center"}}>
-                 <TextField id="standard-basic" label="CSCE Course Number" variant="standard" value={value} onChange={(e) => setValue(e.target.value)} />
-                <Button variant="contained" onClick={() => {
+                <label>CSCE Course Number:</label>
+            </Box>
+                <Box sx={{marginTop: "2%", display:"flex", justifyContent:"center"}}>
+                <input list="browsers" name="browser" variant="standard" value={value} onChange={(e) => setValue(e.target.value)} />
+                    <datalist id="browsers">
+                        <option value="402"/>
+                        <option value="410"/>
+                        <option value="411"/>
+                        <option value="420"/>
+                        <option value="421"/>
+                        <option value="430"/>
+                        <option value="431"/>
+                        <option value="433"/>
+                        <option value="434"/>
+                        <option value="435"/>
+                        <option value="436"/>
+                        <option value="438"/>
+                        <option value="440"/>
+                        <option value="441"/>
+                        <option value="443"/>
+                        <option value="445"/>
+                        <option value="447"/>
+                        <option value="451"/>
+                        <option value="452"/>
+                        <option value="461"/>
+                        <option value="462"/>
+                        <option value="463"/>
+                        <option value="464"/>
+                        <option value="465"/>
+                        <option value="469"/>
+                        <option value="470"/>
+                        <option value="481"/>
+                        <option value="482"/>
+                        <option value="483"/>
+                        <option value="489"/>
+                    </datalist>
+                <Button variant="contained" sx={{ bgcolor: "maroon" }} onClick={() => {
                     getMatchingDocs(value);
                 }}>Submit</Button>
             </Box>
             <Box sx={{ display:"flex", justifyContent:"center", marginTop: "2%", textAlign: "center"}}>
                 <table style={{borderRadius:"5px", fontSize:"18px", borderCollapse:"collapse", width:"80%",
-                    whiteSpace:"nowrap", backgroundColor:"white"}}>
+                    whiteSpace:"nowrap", backgroundColor:"lightgray"}}>
                     <thead>
                     <tr>
-                        <th style={{ width:"50%", border:"1px solid black", backgroundColor:"rgba(71,147,227,1)",
+                        <th style={{ width:"50%", border:"1px solid black", backgroundColor:"rgba(128,0,0,1)",
                             color:"#ffffff" }}>Professor</th>
-                        <th style={{ width:"50%", border:"1px solid black", backgroundColor:"rgba(71,147,227,1)",
+                        <th style={{ width:"50%", border:"1px solid black", backgroundColor:"rgba(128,0,0,1)",
                             color:"#ffffff" }}>Rating</th>
                     </tr>
                     </thead>
