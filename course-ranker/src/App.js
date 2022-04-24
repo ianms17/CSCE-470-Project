@@ -8,7 +8,6 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import {collection, query, where, getDocs, getFirestore} from "firebase/firestore";
-import {Select} from "@mui/material";
 
 function App() {
     const [prof_results, setProfResults] = useState([])
@@ -97,40 +96,8 @@ function App() {
                 <label>CSCE Course Number:</label>
             </Box>
                 <Box sx={{marginTop: "2%", display:"flex", justifyContent:"center"}}>
-                <input list="browsers" name="browser" variant="standard" value={value} onChange={(e) => setValue(e.target.value)} />
-                    <datalist id="browsers">
-                        <option value="402"/>
-                        <option value="410"/>
-                        <option value="411"/>
-                        <option value="420"/>
-                        <option value="421"/>
-                        <option value="430"/>
-                        <option value="431"/>
-                        <option value="433"/>
-                        <option value="434"/>
-                        <option value="435"/>
-                        <option value="436"/>
-                        <option value="438"/>
-                        <option value="440"/>
-                        <option value="441"/>
-                        <option value="443"/>
-                        <option value="445"/>
-                        <option value="447"/>
-                        <option value="451"/>
-                        <option value="452"/>
-                        <option value="461"/>
-                        <option value="462"/>
-                        <option value="463"/>
-                        <option value="464"/>
-                        <option value="465"/>
-                        <option value="469"/>
-                        <option value="470"/>
-                        <option value="481"/>
-                        <option value="482"/>
-                        <option value="483"/>
-                        <option value="489"/>
-                    </datalist>
-                <Button variant="contained" sx={{ bgcolor: "maroon" }} onClick={() => {
+                <TextField id="standard-basic" label="Enter Course #" variant="standard"  value={value} onChange={(e) => setValue(e.target.value)} />
+                <Button variant="contained" sx={{ bgcolor: "maroon",  ':hover': {bgcolor: '#808080'}}} onClick={() => {
                     getMatchingDocs(value);
                 }}>Submit</Button>
             </Box>
