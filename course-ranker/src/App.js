@@ -17,7 +17,7 @@ function App() {
     const q_weight = 0.7
     const pass_weight = 0.5
     const gpa_weight = 0.75
-    const num_taught_weight = 0.15
+    const num_taught_weight = 0.005
     let course_list = [];
     let prof_scores = new Map();
 

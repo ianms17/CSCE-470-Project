@@ -67,15 +67,15 @@ def rank():
 
     # score professors based on rates found
     a_weight = 0.2
-    q_weight = 0.7
+    q_weight = 1
     pass_weight = 0.5
     gpa_weight = 0.75
-    num_taught_weight = 0.15
+    num_taught_weight = 0.005
     prof_scores = {}
     for prof in prof_a_rate:
         prof_scores[prof] = (
             prof_a_rate[prof] * a_weight
-            + prof_q_rate[prof] * q_weight
+            - prof_q_rate[prof] * q_weight
             + prof_pass_rate[prof] * pass_weight
             + prof_avg_gpa[prof] * gpa_weight
             + num_times_taught[prof] * num_taught_weight
@@ -83,9 +83,14 @@ def rank():
 
     # sort prof scores and print them
     sorted_scores = sorted(prof_scores, key=prof_scores.get)
-    for prof in sorted_scores:
+    sorted_scores_order = []
+
+    for i in sorted_scores[::-1]:
+        sorted_scores_order.append(i)
+
+    for prof in sorted_scores_order:
         print(prof, '|', prof_scores[prof])
-    return sorted_scores
+    return sorted_scores_order
 
 
 def precision_at_k(k, ranking, rmp):
@@ -112,10 +117,12 @@ def evaluate():
     prof_list = []
 
     for prof in ranking:
-        docs = db.collection(u'rating').where(u'prof', u'==', prof).stream()
-        doc = docs[0]
-        doc_dict = doc.to_dict()
-        prof_list.append((doc_dict['prof'], doc_dict['quality']))
+        doc = db.collection(u'rating').where(u'prof', u'==', prof).get()
+        if len(doc) == 0:
+            prof_list.append((prof, 2.5))
+        else:
+            doc_dict = doc[0].to_dict()
+            prof_list.append((doc_dict['prof'], doc_dict['quality']))
 
     num_profs = len(prof_list)
     if num_profs > 5:
@@ -134,10 +141,21 @@ def evaluate():
     for pair in prof_list:
         sorted_prof_list.append(pair[0])
 
+    fixed_prof_list = []
+    for i in range(len(sorted_prof_list)):
+        if '(H)' not in sorted_prof_list[i]:
+            fixed_prof_list.append(sorted_prof_list[i])
+        else:
+            k -= 1
+
+    fixed_prof_list = list(reversed(fixed_prof_list))
+
+    print('==============================')
+    print(fixed_prof_list)
     print('==============================')
 
-    precision_at_k(k, ranking, sorted_prof_list)
-    recall_at_k(k, ranking, sorted_prof_list)
+    precision_at_k(k, ranking, fixed_prof_list)
+    recall_at_k(k, ranking, fixed_prof_list)
 
 
 evaluate()
